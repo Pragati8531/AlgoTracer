@@ -1,15 +1,22 @@
+# from flask import Flask, request, jsonify
+# from flask_cors import CORS
+# from algorithms.bfs import bfs
+# from algorithms.dfs import dfs
+# from algorithms.astar import a_star  # ✅ NEW
+# import time
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from algorithms.bfs import bfs
 from algorithms.dfs import dfs
-from algorithms.astar import a_star  # ✅ NEW
+from algorithms.astar import a_star
+from utils.grid_utils import manhattan_distance
 import time
 
 app = Flask(__name__)
 CORS(app)
 
 @app.route("/api/run-bfs", methods=["POST"])
-def run_bfs():
+def run_bfs():S
     try:
         data = request.get_json()
         grid = data["grid"]
