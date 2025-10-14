@@ -1,60 +1,63 @@
 import React from 'react';
-import AlgorithmSelector from './AlgorithmSelector';
 import StatsPanel from './StatsPanel';
 import '../styles/Controls.css';
 
-const ControlsComponent = ({ 
-  selectedAlgorithm, 
-  onAlgorithmChange,
-  onVisualize,
-  onClearGrid,
-  onClearPath,
-  onGenerateMaze,
-  isVisualizing,
-  stats,
-  algorithms 
+const ControlsComponent = ({
+  // algorithm selector props
+  selectedAlgorithm = 'dijkstra',
+  onAlgorithmChange = () => {},
+
+  // visualization control props
+  isVisualizing = false,
+  onVisualize = () => {},
+  onClearGrid = () => {},
+  onClearPath = () => {},
+  onGenerateMaze = () => {}
 }) => {
   return (
-    <div className="controls-container">
-      <h3>Algorithm Controls</h3>
-      
-      <AlgorithmSelector
-        selectedAlgorithm={selectedAlgorithm}
-        onAlgorithmChange={onAlgorithmChange}
-        algorithms={algorithms}
-      />
-      
-      <div className="control-buttons">
-        <button 
+    <div className="controls-wrapper">
+      <div className="controls-container control-buttons">
+        <div className="controls-row">
+          <label htmlFor="algorithm-select" className="label">
+            Algorithm:
+          </label>
+          <select
+            id="algorithm-select"
+            value={selectedAlgorithm}
+            onChange={(e) => onAlgorithmChange(e.target.value)}
+            disabled={isVisualizing}
+            className="algorithm-select"
+          >
+            <option value="dijkstra">Dijkstra</option>
+            <option value="astar">A*</option>
+            <option value="bfs">BFS</option>
+            <option value="dfs">DFS</option>
+          </select>
+        </div>
+
+        <button
+          className={`btn-primary ${isVisualizing ? 'loading' : ''}`}
           onClick={onVisualize}
           disabled={isVisualizing}
-          className={`btn-primary ${isVisualizing ? 'loading' : ''}`}
         >
-          {isVisualizing ? 'Visualizing...' : `Run ${selectedAlgorithm.toUpperCase()}`}
+          {isVisualizing ? 'Visualizing...' : 'Visualize'}
         </button>
-        
-        <button onClick={onClearPath} disabled={isVisualizing} className="btn-secondary">
-          Clear Path
-        </button>
-        
-        <button onClick={onClearGrid} disabled={isVisualizing} className="btn-secondary">
+
+        <button className="btn-secondary" onClick={onClearGrid} disabled={isVisualizing}>
           Clear Grid
         </button>
-        
-        <button onClick={onGenerateMaze} disabled={isVisualizing} className="btn-secondary">
+
+        <button className="btn-secondary" onClick={onClearPath} disabled={isVisualizing}>
+          Clear Path
+        </button>
+
+        <button className="btn-secondary" onClick={onGenerateMaze} disabled={isVisualizing}>
           Generate Maze
         </button>
       </div>
-      
-      <StatsPanel stats={stats} algorithm={selectedAlgorithm} />
-      
-      <div className="instructions">
-        <h4>Instructions:</h4>
-        <ul>
-          <li>Click to place/remove walls</li>
-          <li>Drag to draw multiple walls</li>
-          <li>Select algorithm and click visualize</li>
-        </ul>
+
+      <div className="stats-panel-wrapper">
+        <StatsPanel />
       </div>
     </div>
   );

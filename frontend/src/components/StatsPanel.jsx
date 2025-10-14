@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const StatsPanel = ({ stats, algorithm }) => {
   if (!stats) {
@@ -16,7 +16,7 @@ const StatsPanel = ({ stats, algorithm }) => {
       <div className="stats-grid">
         <div className="stat-item">
           <span className="stat-label">Algorithm:</span>
-          <span className="stat-value">{stats.algorithm}</span>
+          <span className="stat-value">{algorithm.toUpperCase()}</span>
         </div>
         <div className="stat-item">
           <span className="stat-label">Path Length:</span>
