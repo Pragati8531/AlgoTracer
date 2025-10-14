@@ -16,7 +16,7 @@ app = Flask(__name__)
 CORS(app)
 
 @app.route("/api/run-bfs", methods=["POST"])
-def run_bfs():S
+def run_bfs():
     try:
         data = request.get_json()
         grid = data["grid"]
