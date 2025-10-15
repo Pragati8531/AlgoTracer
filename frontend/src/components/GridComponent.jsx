@@ -14,7 +14,6 @@ const GridComponent = ({ isVisualizing }) => {
   useEffect(() => {
     if (isVisualizing) {
       console.log("Visualization started!");
-      // For demo: color random cells
       const interval = setInterval(() => {
         setGrid((prev) =>
           prev.map((row) =>
@@ -27,7 +26,16 @@ const GridComponent = ({ isVisualizing }) => {
   }, [isVisualizing]);
 
   return (
-    <div className="grid-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(10, 20px)', gap: '2px' }}>
+    <div
+      className="grid-container"
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(10, 20px)',
+        gap: '2px',
+        marginTop: '20px',
+        justifyContent: 'center',
+      }}
+    >
       {grid.map((row, rIdx) =>
         row.map((cell, cIdx) => (
           <div
@@ -37,6 +45,7 @@ const GridComponent = ({ isVisualizing }) => {
               height: '20px',
               backgroundColor: cell ? 'lightblue' : 'lightgray',
               border: '1px solid #ccc',
+              transition: 'background-color 0.2s ease',
             }}
           />
         ))
