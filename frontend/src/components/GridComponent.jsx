@@ -1,37 +1,55 @@
-import React from 'react';
-import { NODE_TYPES } from '../constants';
+import React, { useState, useEffect } from 'react';
+import './Grid.css';
 
-const GridComponent = ({ grid, onCellClick, onCellDrag, isVisualizing, visitedNodes, pathNodes }) => {
+const GridComponent = () => {
+  // Create grid state (default 20x40 grid)
+  const [grid, setGrid] = useState([]);
 
-  // Determine if cell is visited or on the path
-  const isVisited = (row, col) => 
-    visitedNodes.some(n => n[0] === row && n[1] === col);
+  // Initialize grid once when the component mounts
+  useEffect(() => {
+    const rows = 20;
+    const cols = 40;
+    const newGrid = Array.from({ length: rows }, () =>
+      Array.from({ length: cols }, () => ({
+        isStart: false,
+        isEnd: false,
+        isWall: false,
+        isVisited: false,
+      }))
+    );
+    setGrid(newGrid);
+  }, []);
 
-  const isPath = (row, col) => 
-    pathNodes.some(n => n[0] === row && n[1] === col);
+  // Handle clicks on cells (you can modify logic later)
+  const handleCellClick = (row, col) => {
+    const newGrid = grid.map((r, rowIndex) =>
+      r.map((cell, colIndex) => {
+        if (rowIndex === row && colIndex === col) {
+          return { ...cell, isWall: !cell.isWall };
+        }
+        return cell;
+      })
+    );
+    setGrid(newGrid);
+  };
 
   return (
     <div className="grid-container">
-      <div className="grid">
-        {grid.map((rowArr, rowIdx) => (
-          <div key={rowIdx} className="grid-row">
-            {rowArr.map((cellType, colIdx) => {
-              let className = `cell ${cellType}`;
-              if (isVisited(rowIdx, colIdx)) className += ' visited';
-              if (isPath(rowIdx, colIdx)) className += ' path';
-
-              return (
-                <div
-                  key={colIdx}
-                  className={className}
-                  onClick={() => onCellClick(rowIdx, colIdx)}
-                  onMouseEnter={(e) => e.buttons === 1 && onCellDrag(rowIdx, colIdx)}
-                />
-              );
-            })}
+      {grid && grid.length > 0 ? (
+        grid.map((row, rowIndex) => (
+          <div key={rowIndex} className="grid-row">
+            {row.map((cell, colIndex) => (
+              <div
+                key={colIndex}
+                className={`grid-cell ${cell.isWall ? 'wall' : ''}`}
+                onClick={() => handleCellClick(rowIndex, colIndex)}
+              ></div>
+            ))}
           </div>
-        ))}
-      </div>
+        ))
+      ) : (
+        <p>Loading grid...</p>
+      )}
     </div>
   );
 };
