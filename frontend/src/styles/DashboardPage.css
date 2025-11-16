@@ -1,0 +1,144 @@
+/* GLOBAL LAYOUT */
+.dashboard-wrapper {
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #0a192f 0%, #010b18 100%);
+  color: #e0e7ff;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+/* HEADER */
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo-title {
+  font-size: 2.5rem;
+  color: #00d1ff;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 0 0 12px rgba(0, 209, 255, 0.6);
+}
+
+.tagline {
+  font-size: 1rem;
+  color: #94a3b8;
+  margin-top: 5px;
+}
+
+/* MAIN SECTION */
+.dashboard-main {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+/* INTRO CARD */
+.glass {
+  background: rgba(13, 25, 51, 0.55);
+  border: 1px solid rgba(0, 209, 255, 0.2);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+}
+
+.intro-card {
+  padding: 30px 40px;
+  text-align: center;
+  color: #e2e8f0;
+  animation: fadeIn 0.8s ease;
+}
+
+.intro-card h2 {
+  color: #00ffcc;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+.intro-card p {
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto;
+  color: #cbd5e1;
+}
+
+.animated-graph {
+  margin: 25px auto;
+}
+
+/* BUTTON */
+.launch-btn {
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 0 20px rgba(0, 209, 255, 0.6);
+  transition: all 0.3s ease;
+}
+
+.launch-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(0, 209, 255, 0.8);
+}
+
+/* INFO GRID */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+.info-box {
+  padding: 20px;
+  text-align: left;
+}
+
+.info-box h3 {
+  color: #00d1ff;
+  margin-bottom: 8px;
+}
+
+.info-box p {
+  color: #cbd5e1;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* FOOTER */
+.dashboard-footer {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+
+.home-link {
+  display: block;
+  color: #00d1ff;
+  margin-top: 10px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.home-link:hover {
+  text-decoration: underline;
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

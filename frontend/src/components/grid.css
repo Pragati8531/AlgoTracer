@@ -1,0 +1,52 @@
+.grid {
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.grid-row {
+  display: flex;
+}
+
+.cell {
+  width: 25px;
+  height: 25px;
+  border: 1px solid #b3c6ff;
+  background-color: #f0f4ff;
+  transition: background-color 0.2s ease;
+}
+
+.cell.start {
+  background-color: green;
+}
+
+.cell.end {
+  background-color: red;
+}
+
+.cell.visited {
+  background-color: #60a5fa; /* light blue */
+  animation: fade 0.3s ease-in-out;
+}
+
+.cell.path {
+  background-color: #9370db; /* purple */
+  animation: glow 0.4s ease-in-out infinite alternate;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 5px #9370db;
+  }
+  to {
+    box-shadow: 0 0 15px #b19cd9;
+  }
+}

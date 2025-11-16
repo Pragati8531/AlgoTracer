@@ -1,0 +1,17 @@
+import pyodbc
+try:
+    conn= pyodbc.connect(
+        'Driver={SQL Server};'
+        'Server=DESKTOP-ETJF353\\SQLEXPRESS;'
+            'Database=CookingRecipePortal;'
+            'Trusted_Connection=yes;'
+    )
+    print("Database Connected Successfully!")
+    cursor=conn.cursor()
+    cursor.execute("SELECT name FROM sys.tables")
+    print("Tables in your database:")
+    for row in cursor:
+        print(row[0])
+        conn.close()
+except Exception as e:
+    print("Connection Failed:",e)

@@ -1,53 +1,25 @@
-import React, { useState } from 'react';
-import AlgorithmSelector from './components/AlgorithmSelector';
-import ControlsComponent from './components/ControlsComponent';
-import GridComponent from './components/GridComponent';
-import StatsPanel from './components/StatsPanel';
-import './styles/Controls.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+// Import the pages
+import HomePage from "./pages/HomePage.jsx";
+import DashboardPage from "./pages/DashboardPage.jsx";
+import VisualizerPage from "./pages/VisualizerPage.jsx";
 
 const App = () => {
-  const [selectedAlgorithm, setSelectedAlgorithm] = useState('dijkstra');
-  const [isVisualizing, setIsVisualizing] = useState(false);
-
-  const algorithms = [
-    { id: 'dijkstra', name: 'Dijkstra', description: 'Finds the shortest path.' },
-    { id: 'astar', name: 'A*', description: 'An informed search algorithm using heuristics.' },
-    { id: 'bfs', name: 'BFS', description: 'Breadth-first search explores all neighbors first.' },
-    { id: 'dfs', name: 'DFS', description: 'Depth-first search explores deep paths first.' },
-  ];
-
-  const handleVisualize = () => {
-    setIsVisualizing(true);
-    setTimeout(() => setIsVisualizing(false), 1500);
-  };
-
-  const handleClearGrid = () => alert('Grid cleared');
-  const handleClearPath = () => alert('Path cleared');
-  const handleGenerateMaze = () => alert('Maze generated');
-
   return (
-    <div className="app-container">
-      <h1>Pathfinding Visualizer</h1>
+    <Router>
+      <Routes>
+        {/* Home page */}
+        <Route path="/" element={<HomePage />} />
 
-      <AlgorithmSelector
-        selectedAlgorithm={selectedAlgorithm}
-        onAlgorithmChange={setSelectedAlgorithm}
-        algorithms={algorithms}
-      />
+        {/* Dashboard page */}
+        <Route path="/dashboard" element={<DashboardPage />} />
 
-      <ControlsComponent
-        isVisualizing={isVisualizing}
-        onVisualize={handleVisualize}
-        onClearGrid={handleClearGrid}
-        onClearPath={handleClearPath}
-        onGenerateMaze={handleGenerateMaze}
-      />
-
-      {/* ✅ Make sure to pass isVisualizing prop here */}
-      <GridComponent isVisualizing={isVisualizing} />
-
-      <StatsPanel />
-    </div>
+        {/* Visualizer page */}
+        <Route path="/visualizer" element={<VisualizerPage />} />
+      </Routes>
+    </Router>
   );
 };
 

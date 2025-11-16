@@ -1,24 +1,29 @@
 import React from "react";
 
-const AlgorithmSelector = ({ algorithms = [], selectedAlgorithm, onAlgorithmChange }) => {
+const AlgorithmSelector = ({ selectedAlgorithm, onAlgorithmChange, algorithms }) => {
   return (
-    <div className="controls-container algorithm-selector">
-      <h3>Select Algorithm</h3>
+    <div style={{ marginBottom: "20px" }}>
+      <h3>Select an Algorithm:</h3>
       <select
-        className="algorithm-dropdown"
         value={selectedAlgorithm}
         onChange={(e) => onAlgorithmChange(e.target.value)}
+        style={{
+          padding: "8px",
+          borderRadius: "5px",
+          border: "1px solid #ccc",
+          fontSize: "1rem",
+        }}
       >
-        {algorithms.length > 0 ? (
-          algorithms.map((algo) => (
-            <option key={algo.id} value={algo.id}>
-              {algo.name}
-            </option>
-          ))
-        ) : (
-          <option disabled>No algorithms available</option>
-        )}
+        {algorithms.map((algo) => (
+          <option key={algo.id} value={algo.id}>
+            {algo.name}
+          </option>
+        ))}
       </select>
+
+      <p style={{ marginTop: "10px", color: "#555" }}>
+        {algorithms.find((a) => a.id === selectedAlgorithm)?.description}
+      </p>
     </div>
   );
 };
